@@ -26,6 +26,37 @@
     </div>
 </header>
 <main>
+    <?php
+    /*
+     * Do here php code for the connection with NS
+     * The API GET request is done with cURL (you don't need to know how but only why !!) :)
+     */
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://gateway.apiportal.ns.nl/virtual-train-api/api/v1/trein/1871?features=drukte',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Ocp-Apim-Subscription-Key: '
+        ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    var_dump(json_decode($response));
+
+    ?>
+
+
+
 
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
